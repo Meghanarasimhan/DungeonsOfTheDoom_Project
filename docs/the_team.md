@@ -1,8 +1,8 @@
 # The Team(Group 9)
 
 ## Member 1: April Uzzle
-Background: Brief description of your background, skills, and experience.
-Role: Their  role in the project
+Background: I am a graduate student in my last quarter pursuing a Master's degree in Computer Science. I have worked as a software engineer in Agile spaces for several years. Most of my development experience is in Java and Spring, using test-driven development. 
+Role: In addition to helping with the development of the application, I will help the team run the Agile ceremonies that I'm already familiar with. I will also help with building the automated test suite.
 
 ## Member 2: Meghashree B Narasimhan
 - Background: I am a graduate student at DePaul University pursuing a Master of Science in Computer Science. I have a strong foundation in software testing, data analysis, and ETL Testing, with over two plus years of professional experience as a Senior Test Engineer at Infosys Limited. My technical expertise includes programming in Java, building data pipelines, conducting ETL testing, and implementing automated testing frameworks. I have a proven track record of delivering high-quality solutions and collaborating effectively in agile teams.
