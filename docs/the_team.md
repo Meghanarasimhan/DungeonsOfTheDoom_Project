@@ -9,10 +9,10 @@
 - Role: In this project, I will focus on learning and updating my skills in Java, JUnit, and Mockito to help implement unit testing and ensure code quality through test-driven development. During the first Sprint, I will contribute to setting up the Gradle build process and integrating GitHub Actions for continuous integration.
 
 ## Member 3: Shereen Fahrai
-Background: Brief description of their background, skills, and experience.
-Role: Their role in the project 
+- Background: I am a graduate student, and I will complete my MS in Computer Science by June 2025. I have worked as an IT Technician at an investigative services company and am currently working as a substitute teacher for my local high school district while looking for a software engineering role. Before pursuing computer science, I earned a BA in English Literature and Creative Writing.
+- Role: My role in this project is to assist with the development of the application in general and help fill in gaps where needed; I plan to provide broad support to the team and contribute wherever I can to ensure the project’s success.
 
-## Member 2: Umair Hussain Shaheer Mohammed
+## Member 4: Umair Hussain Shaheer Mohammed
 Background: Brief description of their background, skills, and experience.
 Role: Their role in the project
 
