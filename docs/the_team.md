@@ -13,6 +13,6 @@
 - Role: My role in this project is to assist with the development of the application in general and help fill in gaps where needed; I plan to provide broad support to the team and contribute wherever I can to ensure the project’s success.
 
 ## Member 4: Umair Hussain Shaheer Mohammed
-Background: I am a Full-Time Graduate Student in Computer Science, Currently I'm Pursuing my 3rd Quarter DePaul University. I have hands-on experience in Python, SQL, ETL & PowerBi. I'm also towards the Front-End Developement with ReactJS.
-Role: My role in this project would is to typically assist with Trello and Also I'll be Supporting my team with Front-End developement for this Project's Code. 
+- Background: I am a Full-Time Graduate Student in Computer Science, Currently I'm Pursuing my 3rd Quarter DePaul University. I have hands-on experience in Python, SQL, ETL & PowerBi. I'm also towards the Front-End Developement with ReactJS.
+- Role: My role in this project would is to typically assist with Trello and Also I'll be Supporting my team with Front-End developement for this Project's Code. 
 
