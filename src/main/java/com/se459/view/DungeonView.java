@@ -8,7 +8,7 @@ public class DungeonView extends JFrame {
     // for now, create constants for the room size
     public static final int ROOM_WIDTH = 11;
     public static final int ROOM_HEIGHT = 5;
-    public static final int CELL_SIZE = 20;
+    public static final int CELL_SIZE = 40;
 
     // create a 2D array to represent the room
     private char[][] room = new char[ROOM_HEIGHT][ROOM_WIDTH];
@@ -20,12 +20,19 @@ public class DungeonView extends JFrame {
     public DungeonView() {
         setTitle("Dungeon of the Doom");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(ROOM_WIDTH * CELL_SIZE, ROOM_HEIGHT * CELL_SIZE + 40);
-        setLocationRelativeTo(null);
+        
         addKeyListener(new KeyHandler(this)); // add key listener to the frame to handle key events
         setFocusable(true); // ensure frame is focusable, meaning it can receive key events 
+        
         initializeRoom();
-        add(new DungeonPanel());
+
+        // Create a panel to draw the room and player on the frame 
+        DungeonPanel dungeonPanel = new DungeonPanel();
+        // Set the preferred size of the panel based on the room size
+        dungeonPanel.setPreferredSize(new Dimension(ROOM_WIDTH * CELL_SIZE, ROOM_HEIGHT * CELL_SIZE));
+        add(dungeonPanel); // add the panel to the frame
+        pack(); // pack the frame to fit the panel (meaning the frame will be resized to fit the panel)
+        setLocationRelativeTo(null); // center the frame
     }
 
 // Initialize the room with walls, dots (for different positions), and player
@@ -51,9 +58,9 @@ private class DungeonPanel extends JPanel {
             for (int j = 0; j < ROOM_WIDTH; j++) {
                 // Draw the room based on the 2D array
                 if (i == playerY && j == playerX) { // if the position is the player's position
-                    g.drawString("@", j * 20, i * 20);
+                    g.drawString("@", (j+1) * CELL_SIZE, (i+1) * CELL_SIZE); 
                 } else { // otherwise, draw the room based on the 2D array
-                    g.drawString(String.valueOf(room[i][j]), j * 20, i * 20);
+                    g.drawString(String.valueOf(room[i][j]), (j+1) * CELL_SIZE, (i+1) * CELL_SIZE); // adjust i and j by 1 to avoid drawing on the border
                 }
             }
         }
