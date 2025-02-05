@@ -10,7 +10,7 @@ public class DungeonOfTheDoomApp {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             DungeonModel dungeonModel = new DungeonModel();
-            DungeonView dungeonView = new DungeonView();
+            DungeonView dungeonView = new DungeonView(dungeonModel);
             DungeonController dungeonController = new DungeonController(dungeonModel, dungeonView);
 
             dungeonView.setVisible(true);
