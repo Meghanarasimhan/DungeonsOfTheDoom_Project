@@ -53,11 +53,4 @@ private class GamePanel extends JPanel {
     }
 }
 
-public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> {
-        DungeonModel dungeonModel = new DungeonModel();
-        DungeonView dungeonView = new DungeonView(dungeonModel);
-        dungeonView.setVisible(true);
-    });
-}
 }
