@@ -10,7 +10,7 @@ public class FloorModel {
     public FloorModel() {
 
         rooms = new ArrayList<>();
-        rooms.add(new RoomModel());
+        addRoom();;
     }
 
     public int getNumRooms() {
@@ -20,4 +20,14 @@ public class FloorModel {
     public List<RoomModel> getRooms() {
         return rooms;
     }
+
+    public void addRoom() {
+        rooms.add(new RoomModel());
+    }
+
+    public RoomModel getRoom(int index) {
+        return rooms.get(index);
+    }
+
+
 }

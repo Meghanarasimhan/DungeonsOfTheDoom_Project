@@ -24,4 +24,10 @@ public class RoomModelTest {
         assertEquals("Number of spaces should equal length * width", expectedNumSpaces, roomModel.getNumSpaces());
     }
 
+    @Test
+    public void testGetCellValue() {
+        assertTrue("A room cell is either a # or a .", roomModel.getCell(1,1) == '#' ||
+                roomModel.getCell(1,1) == '.');
+    }
+
 }

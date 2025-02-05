@@ -7,13 +7,15 @@ public class RoomModel {
     private final int numSpaces;
     private final int length;
     private final int width;
+    private final char[][] room;
 
     public RoomModel() {
         r = new Random();
-
-        length = r.nextInt(1, 100);
-        width = r.nextInt(1, 100);
-        numSpaces = length * width;
+        length = r.nextInt(3, 20);
+        width = r.nextInt(3, 20);
+        this.room = new char[width][length];
+        numSpaces = width * length;
+        generateRoom();
     }
 
     public int getNumSpaces() {
@@ -26,5 +28,23 @@ public class RoomModel {
 
     public int getWidth() {
         return width;
+    }
+
+    public char getCell(int width, int length) {
+        return room[width][length];
+    }
+
+    // Initialize the room with walls and dots (for different positions)
+    private void generateRoom() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < length; j++) {
+                // if the position is on the border, set it as a wall
+                if (i == 0 || i == width - 1 || j == 0 || j == length - 1) {
+                    room[i][j] = '#';
+                } else {
+                    room[i][j] = '.'; // otherwise, set it as a dot
+                }
+            }
+        }
     }
 }
