@@ -2,106 +2,62 @@ package com.se459.view;
 
 import javax.swing.*;
 import java.awt.*;
+import com.se459.model.DungeonModel;
+import com.se459.model.FloorModel;
+import com.se459.model.PlayerModel;
+import com.se459.model.RoomModel;
 
 public class DungeonView extends JFrame {
 
-    // for now, create constants for the room size
-    public static final int ROOM_WIDTH = 11;
-    public static final int ROOM_HEIGHT = 5;
-    public static final int CELL_SIZE = 40;
-
-    // create a 2D array to represent the room
-    private char[][] room = new char[ROOM_HEIGHT][ROOM_WIDTH];
-
-    // set player's current position
-    private int playerX = 1;
-    private int playerY = 1;
-
-    public DungeonView() {
+    public DungeonView(DungeonModel dungeonModel) {
         setTitle("Dungeon of the Doom");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        addKeyListener(new KeyHandler(this)); // add key listener to the frame to handle key events
-        setFocusable(true); // ensure frame is focusable, meaning it can receive key events 
-        
-        initializeRoom();
+        setFocusable(true); // set the frame focusable, meaning it can receive key events
 
         // Create a panel to draw the room and player on the frame 
-        DungeonPanel dungeonPanel = new DungeonPanel();
-        // Set the preferred size of the panel based on the room size
-        dungeonPanel.setPreferredSize(new Dimension(ROOM_WIDTH * CELL_SIZE, ROOM_HEIGHT * CELL_SIZE));
-        add(dungeonPanel); // add the panel to the frame
+        GamePanel gamePanel = new GamePanel(dungeonModel);
+        // Set the preferred size of the panel based on total size of floor by cell size
+        gamePanel.setPreferredSize(new Dimension(500,500));
+        add(gamePanel); // add the panel to the frame
         pack(); // pack the frame to fit the panel (meaning the frame will be resized to fit the panel)
         setLocationRelativeTo(null); // center the frame
     }
 
-// Initialize the room with walls, dots (for different positions), and player
-private void initializeRoom() {
-    for (int i = 0; i < ROOM_HEIGHT; i++) {
-        for (int j = 0; j < ROOM_WIDTH; j++) {
-            // if the position is on the border, set it as a wall
-            if (i == 0 || i == ROOM_HEIGHT - 1 || j == 0 || j == ROOM_WIDTH - 1) {
-                room[i][j] = '#';
-            } else {
-                room[i][j] = '.'; // otherwise, set it as a dot
-            }
-        }
-    }
-}
-
 // Create a panel to draw the room and player
-private class DungeonPanel extends JPanel {
+private class GamePanel extends JPanel {
+
+    private static final int CELL_SIZE = 20; //size of each cell in the room (40x40 pixels)
+    private final FloorModel floorModel;
+    private final PlayerModel player;
+
+    public GamePanel(DungeonModel dungeonModel) {
+        this.floorModel = dungeonModel.getFloor(0); // get the first floor
+        this.player = dungeonModel.getPlayer(); // get the player
+    }
+
+    // Draw the room and player on the panel
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) { 
         super.paintComponent(g);
-        for (int i = 0; i < ROOM_HEIGHT; i++) {
-            for (int j = 0; j < ROOM_WIDTH; j++) {
+        RoomModel room = floorModel.getRoom(0);
+        for (int i = 0; i < room.getWidth(); i++) {
+            for (int j = 0; j < room.getLength(); j++) {
                 // Draw the room based on the 2D array
-                if (i == playerY && j == playerX) { // if the position is the player's position
-                    g.drawString("@", (j+1) * CELL_SIZE, (i+1) * CELL_SIZE); 
+                if (i == player.getPositionX() && j == player.getPositionY()) { // if this position is precisely the player's position
+                    g.drawString("@", (i+1) * CELL_SIZE, (j+1) * CELL_SIZE); 
                 } else { // otherwise, draw the room based on the 2D array
-                    g.drawString(String.valueOf(room[i][j]), (j+1) * CELL_SIZE, (i+1) * CELL_SIZE); // adjust i and j by 1 to avoid drawing on the border
+                    g.drawString(String.valueOf(room.getCell(i, j)), (i+1) * CELL_SIZE, (j+1) * CELL_SIZE); // adjust i and j by 1 to avoid drawing on the border
                 }
             }
         }
     }
 }
 
-
-// Handle player's movement
-public void movePlayer(char direction){
-    int newX = playerX;
-    int newY = playerY;
-    // Update the player's position based on the direction of arrow keys (left-arrow, right-arrow, up-arrow, down-arrow)
-    switch (direction) {
-        case 'L':
-            newX = playerX - 1;
-            break;
-        case 'R':
-            newX = playerX + 1;
-            break;
-        case 'U':
-            newY = playerY - 1;
-            break;
-        case 'D':
-            newY = playerY + 1;
-            break;
-    }
-    // Check if the new position is a wall or not
-    if (room[newY][newX] != '#') {
-        playerX = newX;
-        playerY = newY;
-    }
-    // Repaint the frame to update the player's position
-    repaint();
-
-}
-
 public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> {
-        DungeonView view = new DungeonView();
-        view.setVisible(true);
+        DungeonModel dungeonModel = new DungeonModel();
+        DungeonView dungeonView = new DungeonView(dungeonModel);
+        dungeonView.setVisible(true);
     });
 }
-
 }
