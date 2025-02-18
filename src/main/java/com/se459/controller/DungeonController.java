@@ -35,6 +35,24 @@ public class DungeonController implements KeyListener {
             case KeyEvent.VK_DOWN:
                 newY++;
                 break;
+            case KeyEvent.VK_A: //move down right diagonally
+                newX++;
+                newY++;
+                break;
+            case KeyEvent.VK_B: //move down left diagonally
+                newX--;
+                newY++;
+                break;
+            case KeyEvent.VK_C: //move up right diagonally
+                newX++;
+                newY--;
+                break;
+            case KeyEvent.VK_D: //move up left diagonally
+                newX--;
+                newY--;
+                break;
+            default:
+                break;
         }
         // Check if the new position is a wall or not
         if (dungeonModel.getFloor(0).getRoom(0).getCell(newX, newY) != '#') {
