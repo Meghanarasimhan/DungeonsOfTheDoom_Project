@@ -140,4 +140,16 @@ public class DungeonControllerTest {
 
         verify(playerModel, times(1)).movePlayer(2, 2);
     }
+
+    @Test
+    public void testPlayerCannotMovePastWall() {
+        when(playerModel.getPositionX()).thenReturn(2);
+        when(playerModel.getPositionY()).thenReturn(2);
+        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_LEFT);
+        when(roomModel.isWall(anyInt(), anyInt())).thenReturn(true);
+
+        dungeonController.keyPressed(keyEvent);
+
+        verify(playerModel, times(0)).movePlayer(anyInt(), anyInt());
+    }
 }
