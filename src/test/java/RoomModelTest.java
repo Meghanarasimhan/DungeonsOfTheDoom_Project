@@ -30,4 +30,10 @@ public class RoomModelTest {
                 roomModel.getCell(1,1) == '.');
     }
 
+    @Test
+    public void testIsWallValue() {
+        assertTrue("Room edges are walls", roomModel.isWall(0,0));
+        assertFalse("There are no walls in the middle of the room", roomModel.isWall(1,1));
+    }
+
 }

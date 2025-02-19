@@ -23,39 +23,31 @@ public class DungeonController implements KeyListener {
         int newX = player.getPositionX();
         int newY = player.getPositionY();
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-                newX--;
-                break;
-            case KeyEvent.VK_RIGHT:
-                newX++;
-                break;
-            case KeyEvent.VK_UP:
-                newY--;
-                break;
-            case KeyEvent.VK_DOWN:
-                newY++;
-                break;
-            case KeyEvent.VK_A: //move down right diagonally
+            case KeyEvent.VK_LEFT -> newX--;
+            case KeyEvent.VK_RIGHT -> newX++;
+            case KeyEvent.VK_UP -> newY--;
+            case KeyEvent.VK_DOWN -> newY++;
+            case KeyEvent.VK_A -> { //move down right diagonally
                 newX++;
                 newY++;
-                break;
-            case KeyEvent.VK_B: //move down left diagonally
+            }
+            case KeyEvent.VK_B -> { //move down left diagonally
                 newX--;
                 newY++;
-                break;
-            case KeyEvent.VK_C: //move up right diagonally
+            }
+            case KeyEvent.VK_C -> { //move up right diagonally
                 newX++;
                 newY--;
-                break;
-            case KeyEvent.VK_D: //move up left diagonally
+            }
+            case KeyEvent.VK_D -> { //move up left diagonally
                 newX--;
                 newY--;
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
         // Check if the new position is a wall or not
-        if (dungeonModel.getFloor(0).getRoom(0).getCell(newX, newY) != '#') {
+        if (!dungeonModel.getFloor(0).getRoom(0).isWall(newX, newY)) {
             player.movePlayer(newX, newY);
         }
         dungeonView.repaint(); // repaint the view to update the player's position
