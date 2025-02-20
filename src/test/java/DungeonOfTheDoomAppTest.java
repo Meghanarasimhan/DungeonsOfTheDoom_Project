@@ -10,6 +10,7 @@ public class DungeonOfTheDoomAppTest {
         DungeonOfTheDoomApp dungeonOfTheDoomApp = new DungeonOfTheDoomApp();
         assertNotNull(dungeonOfTheDoomApp);
 
+        System.setProperty("java.awt.headless", "true");
         DungeonOfTheDoomApp.main(new String[]{});
         Thread.sleep(2000);
         DungeonOfTheDoomApp.shutdown();
