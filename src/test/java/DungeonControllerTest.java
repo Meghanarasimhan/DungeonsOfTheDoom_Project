@@ -97,7 +97,7 @@ public class DungeonControllerTest {
     public void testPlayerCanMoveDownRightDiagonally() {
         when(playerModel.getPositionX()).thenReturn(3);
         when(playerModel.getPositionY()).thenReturn(3);
-        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_A);
+        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_N);
         when(roomModel.isWall(anyInt(), anyInt())).thenReturn(false);
 
         dungeonController.keyPressed(keyEvent);
@@ -121,7 +121,7 @@ public class DungeonControllerTest {
     public void testPlayerCanMoveUpRightDiagonally() {
         when(playerModel.getPositionX()).thenReturn(3);
         when(playerModel.getPositionY()).thenReturn(3);
-        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_C);
+        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_U);
         when(roomModel.isWall(anyInt(), anyInt())).thenReturn(false);
 
         dungeonController.keyPressed(keyEvent);
@@ -133,7 +133,7 @@ public class DungeonControllerTest {
     public void testPlayerCanMoveUpLeftDiagonally() {
         when(playerModel.getPositionX()).thenReturn(3);
         when(playerModel.getPositionY()).thenReturn(3);
-        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_D);
+        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_Y);
         when(roomModel.isWall(anyInt(), anyInt())).thenReturn(false);
 
         dungeonController.keyPressed(keyEvent);

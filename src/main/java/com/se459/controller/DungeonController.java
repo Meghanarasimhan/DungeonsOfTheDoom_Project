@@ -22,30 +22,34 @@ public class DungeonController implements KeyListener {
         PlayerModel player = dungeonModel.getPlayer();
         int newX = player.getPositionX();
         int newY = player.getPositionY();
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_LEFT -> newX--;
-            case KeyEvent.VK_RIGHT -> newX++;
-            case KeyEvent.VK_UP -> newY--;
-            case KeyEvent.VK_DOWN -> newY++;
-            case KeyEvent.VK_A -> { //move down right diagonally
-                newX++;
-                newY++;
-            }
-            case KeyEvent.VK_B -> { //move down left diagonally
-                newX--;
-                newY++;
-            }
-            case KeyEvent.VK_C -> { //move up right diagonally
-                newX++;
-                newY--;
-            }
-            case KeyEvent.VK_D -> { //move up left diagonally
-                newX--;
-                newY--;
-            }
-            default -> {
-            }
+        boolean isUppercase = Character.isUpperCase(e.getKeyChar());
+        int keyCode = e.getKeyCode();
+        if (keyCode == KeyEvent.VK_LEFT || (keyCode == KeyEvent.VK_H && !isUppercase)) {
+            newX--;
+        } else if (keyCode == KeyEvent.VK_RIGHT || (keyCode == KeyEvent.VK_L && !isUppercase)) {
+            newX++;
+        } else if (keyCode == KeyEvent.VK_UP || (keyCode == KeyEvent.VK_K && !isUppercase)) {
+            newY--;
+        } else if (keyCode == KeyEvent.VK_DOWN || (keyCode == KeyEvent.VK_J && !isUppercase)) {
+            newY++;
+        } else if (keyCode == KeyEvent.VK_N && !isUppercase) {
+            //move down right diagonally
+            newX++;
+            newY++;
+        } else if (keyCode == KeyEvent.VK_B && !isUppercase) {
+            //move down left diagonally
+            newX--;
+            newY++;
+        } else if (keyCode == KeyEvent.VK_U && !isUppercase) {
+            //move up right diagonally
+            newX++;
+            newY--;
+        } else if (keyCode == KeyEvent.VK_Y && !isUppercase) {
+            //move up left diagonally
+            newX--;
+            newY--;
         }
+
         // Check if the new position is a wall or not
         if (!dungeonModel.getFloor(0).getRoom(0).isWall(newX, newY)) {
             player.movePlayer(newX, newY);
