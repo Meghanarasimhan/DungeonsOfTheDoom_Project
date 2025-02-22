@@ -34,6 +34,10 @@ public class RoomModel {
         return room[width][length];
     }
 
+    public boolean isWall(int xCoordinate, int yCoordinate) {
+        return room[xCoordinate][yCoordinate] == '#';
+    }
+
     // Initialize the room with walls and dots (for different positions)
     private void generateRoom() {
         for (int i = 0; i < width; i++) {
