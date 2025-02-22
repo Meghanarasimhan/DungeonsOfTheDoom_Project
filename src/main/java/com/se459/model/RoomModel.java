@@ -3,7 +3,7 @@ package com.se459.model;
 import java.util.Random;
 
 public class RoomModel {
-    private final Random r = new Random();;
+    private final Random r = new Random();
     private final int numSpaces;
     private final int length;
     private final int width;
@@ -11,8 +11,8 @@ public class RoomModel {
     private MonsterModel monsterModel = null;
 
     public RoomModel() {
-        length = r.nextInt(3, 20);
-        width = r.nextInt(3, 20);
+        length = r.nextInt(18) + 3;
+        width = r.nextInt(18) + 3;
         this.room = new char[width][length];
         numSpaces = width * length;
         generateRoom();
@@ -31,8 +31,8 @@ public class RoomModel {
         return width;
     }
 
-    public char getCell(int width, int length) {
-        return room[width][length];
+    public char getCell(int x, int y) {
+        return room[x][y];
     }
 
     public boolean isWall(int xCoordinate, int yCoordinate) {
@@ -47,38 +47,31 @@ public class RoomModel {
         this.monsterModel = monsterModel;
     }
 
-    // Initialize the room with walls and dots (for different positions)
+    // Initialize the room with walls around the border and dots inside.
     private void generateRoom() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < length; j++) {
-                // if the position is on the border, set it as a wall
+                // Set border cells as walls.
                 if (i == 0 || i == width - 1 || j == 0 || j == length - 1) {
                     room[i][j] = '#';
                 } else {
-                    room[i][j] = '.'; // otherwise, set it as a dot
+                    room[i][j] = '.'; // inner cells are open space.
                 }
             }
         }
     }
 
+    // Generate a Bat monster in the room based on a random chance.
     private void generateMonster() {
         boolean shouldGenerateMonster = r.nextDouble() > 0.5;
 
         if (shouldGenerateMonster) {
-            int monster = r.nextInt(1, 3);
-
-            switch (monster) {
-                case 1:
-                    AquatorModel aquator = new AquatorModel();
-                    int xPos = r.nextInt(1, width - 1);
-                    int yPos = r.nextInt(1, length - 1);
-                    aquator.setPositionX(xPos);
-                    aquator.setPositionY(yPos);
-                    monsterModel = aquator;
-                    break;
-                default:
-                    break;
-            }
+            BatModel bat = new BatModel();
+            int xPos = r.nextInt(width - 2) + 1;
+            int yPos = r.nextInt(length - 2) + 1;
+            bat.setPositionX(xPos);
+            bat.setPositionY(yPos);
+            monsterModel = bat;
         }
     }
 }
