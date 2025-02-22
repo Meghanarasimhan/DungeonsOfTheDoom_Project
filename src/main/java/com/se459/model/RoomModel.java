@@ -65,7 +65,7 @@ public class RoomModel {
         boolean shouldGenerateMonster = r.nextDouble() > 0.5;
 
         if (shouldGenerateMonster) {
-            int monster = r.nextInt(1, 26);
+            int monster = r.nextInt(1, 3);
 
             switch (monster) {
                 case 1:
