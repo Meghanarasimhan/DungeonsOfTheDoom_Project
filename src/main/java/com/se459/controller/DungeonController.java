@@ -3,10 +3,9 @@ package com.se459.controller;
 import com.se459.model.DungeonModel;
 import com.se459.view.DungeonView;
 import com.se459.model.PlayerModel;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
-public class DungeonController implements KeyListener {
+public class DungeonController implements KeyListener, ActionListener {
     private DungeonModel dungeonModel;
     private DungeonView dungeonView;
 
@@ -14,6 +13,7 @@ public class DungeonController implements KeyListener {
         this.dungeonModel = dungeonModel;
         this.dungeonView = dungeonView;
         dungeonView.addKeyListener(this);
+        dungeonView.addNameFieldActionListener(this); 
     }
 
     // Handle key events for player movement (left-arrow, right-arrow, up-arrow, down-arrow)
@@ -51,6 +51,16 @@ public class DungeonController implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         // nothing to do here
+    }
+
+    // Handle action event for player entering name
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String playerName = dungeonView.getPlayerName();
+        if (!playerName.isEmpty()) {
+            dungeonModel.getPlayer().setPlayerName(playerName);
+            dungeonView.showGameView();
+        }
     }
 
 }

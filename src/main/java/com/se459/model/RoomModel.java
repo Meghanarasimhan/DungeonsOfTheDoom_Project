@@ -12,7 +12,7 @@ public class RoomModel {
     public RoomModel() {
         r = new Random();
         length = r.nextInt(3, 20);
-        width = r.nextInt(3, 20);
+        width = r.nextInt(4, 20); // origin so that room is not too small
         this.room = new char[width][length];
         numSpaces = width * length;
         generateRoom();

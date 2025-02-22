@@ -1,6 +1,7 @@
 package com.se459.model;
 
 public class PlayerModel {
+    private String playerName;
     private int positionX;
     private int positionY;
 
@@ -96,6 +97,14 @@ public class PlayerModel {
         "    Gold:" + gold + 
         "    Armor:" + armor + 
         "    Exp:" + level + "/" + experience;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
 }
