@@ -74,7 +74,7 @@ public class RoomModel {
                     int yPos = r.nextInt(1, length - 1);
                     aquator.setPositionX(xPos);
                     aquator.setPositionY(yPos);
-                    monsterModel = aquator;
+                    setMonsterModel(aquator);
                     break;
                 default:
                     break;

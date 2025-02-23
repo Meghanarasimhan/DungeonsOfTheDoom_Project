@@ -152,4 +152,16 @@ public class DungeonControllerTest {
 
         verify(playerModel, times(0)).movePlayer(anyInt(), anyInt());
     }
+
+    @Test
+    public void testViewIsUpdated() {
+        when(playerModel.getPositionX()).thenReturn(2);
+        when(playerModel.getPositionY()).thenReturn(2);
+        when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_LEFT);
+        when(roomModel.isWall(anyInt(), anyInt())).thenReturn(false);
+
+        dungeonController.keyPressed(keyEvent);
+
+        verify(dungeonView, times(1)).repaint();
+    }
 }
