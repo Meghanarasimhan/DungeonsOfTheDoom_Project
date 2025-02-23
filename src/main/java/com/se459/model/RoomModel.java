@@ -62,7 +62,7 @@ public class RoomModel {
     }
 
     private void generateMonster() {
-        boolean shouldGenerateMonster = r.nextDouble() > 0.5;
+        boolean shouldGenerateMonster = r.nextDouble() > 0.25;
 
         if (shouldGenerateMonster) {
             int monster = r.nextInt(1, 3);

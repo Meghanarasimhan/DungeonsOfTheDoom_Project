@@ -2,6 +2,7 @@ package com.se459.view;
 
 import javax.swing.*;
 import java.awt.*;
+
 import com.se459.model.DungeonModel;
 import com.se459.model.FloorModel;
 import com.se459.model.PlayerModel;
@@ -21,7 +22,7 @@ public class GamePanel extends JPanel {
 
     // Draw the room and player on the panel
     @Override
-    protected void paintComponent(Graphics g) { 
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         RoomModel room = floorModel.getRoom(0);
 
@@ -30,7 +31,10 @@ public class GamePanel extends JPanel {
                 // Draw the room and player based on the 2D array
                 if (i == player.getPositionX() && j == player.getPositionY()) { // if this position is precisely the player's position
                     g.setColor(Color.YELLOW);
-                    g.drawString("@", (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING); 
+                    g.drawString("@", (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING);
+                } else if (room.getMonsterModel() != null && (i == room.getMonsterModel().getPositionX() && j == room.getMonsterModel().getPositionY())) {
+                    g.setColor(Color.RED);
+                    g.drawString(room.getMonsterModel().getScreenChar(), (i + 1) * CELL_SIZE, (j + 1) * CELL_SIZE);
                 } else { // otherwise, draw the room based on the 2D array
                     g.setColor(Color.GREEN);
                     g.drawString(String.valueOf(room.getCell(i, j)), (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING); // adjust i and j by padding to avoid drawing on the border
@@ -39,3 +43,4 @@ public class GamePanel extends JPanel {
         }
     }
 }
+
