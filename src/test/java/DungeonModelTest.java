@@ -1,5 +1,6 @@
 import com.se459.model.DungeonModel;
 import com.se459.model.FloorModel;
+import com.se459.model.PlayerModel;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -40,5 +41,18 @@ public class DungeonModelTest {
         dungeonModel.addFloor();
 
         assertEquals("Dungeon should have two floors now", 2, dungeonModel.getNumFloors());
+    }
+    @Test
+    public void testGetFloors() {
+        assertEquals(1, dungeonModel.getFloors().size());
+        dungeonModel.addFloor();
+        assertEquals(2, dungeonModel.getFloors().size());
+    }
+    @Test
+    public void testGetPlayer() {
+        PlayerModel player = dungeonModel.getPlayer();
+        assertNotNull(player);
+        assertEquals(1, player.getPositionX());
+        assertEquals(1, player.getPositionY());
     }
 }
