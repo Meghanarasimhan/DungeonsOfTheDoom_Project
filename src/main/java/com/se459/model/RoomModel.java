@@ -66,12 +66,20 @@ public class RoomModel {
         boolean shouldGenerateMonster = r.nextDouble() > 0.5;
 
         if (shouldGenerateMonster) {
-            BatModel bat = new BatModel();
-            int xPos = r.nextInt(width - 2) + 1;
-            int yPos = r.nextInt(length - 2) + 1;
-            bat.setPositionX(xPos);
-            bat.setPositionY(yPos);
-            monsterModel = bat;
+            int monster = r.nextInt(2) + 1; // Only generates BatModel
+
+            switch (monster) {
+                case 1:
+                    BatModel bat = new BatModel();
+                    int xPos = r.nextInt(width - 2) + 1;
+                    int yPos = r.nextInt(length - 2) + 1;
+                    bat.setPositionX(xPos);
+                    bat.setPositionY(yPos);
+                    setMonsterModel(bat);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
