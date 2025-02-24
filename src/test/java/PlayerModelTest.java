@@ -1,27 +1,58 @@
+import com.se459.model.DungeonModel;
+import com.se459.model.FloorModel;
 import com.se459.model.PlayerModel;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.Assert.assertEquals;
-
-public class PlayerModelTest {
-    private PlayerModel playerModel;
+public class DungeonModelTest {
+    private DungeonModel dungeonModel;
+    private FloorModel floorModel;
 
     @Before
     public void setUp() {
-        playerModel = new PlayerModel(1, 2);
+        dungeonModel = new DungeonModel();
+        floorModel = dungeonModel.getFloors().get(0);
     }
 
     @Test
-    public void testPlayerInitialization() {
-        assertEquals("X coordinate is populated", 1, playerModel.getPositionX());
-        assertEquals("Y coordinate is populated", 2, playerModel.getPositionY());
+    public void testDungeonInitialzation(){
+        assertEquals("Dungeon should have exactly one floor for now",1, dungeonModel.getNumFloors());
+        assertEquals("Dungeons should have only one floor in the list", 1, floorModel.getNumRooms());
+
+        assertNotNull("Floor should not be null", dungeonModel.getFloors().get(0));
+        assertNotNull("Floors can be accessed individually", dungeonModel.getFloor(0));
+        assertNotNull("Player should not be null", dungeonModel.getPlayer());
     }
 
     @Test
-    public void testUpdatePlayerPosition() {
-        playerModel.movePlayer(2, 3);
-        assertEquals("X coordinate is updated", 2, playerModel.getPositionX());
-        assertEquals("Y coordinate is updated", 3, playerModel.getPositionY());
+    public void testFloorInitialization(){
+
+        assertEquals("Floor should have one room for now", 1, floorModel.getNumRooms());
+        assertEquals("Floor should have one room in the list",1,floorModel.getRooms().size());
+        assertNotNull("Floor should not be null", floorModel.getRooms().get(0));
+        assertNotNull("Rooms in a floor can be fetched", floorModel.getRoom(0));
+    }
+
+    @Test
+    public void testAddingFloor() {
+        assertEquals("Dungeon should have one floor for now", 1, dungeonModel.getNumFloors());
+
+        dungeonModel.addFloor();
+
+        assertEquals("Dungeon should have two floors now", 2, dungeonModel.getNumFloors());
+    }
+    @Test
+    public void testGetFloors() {
+        assertEquals(1, dungeonModel.getFloors().size());
+        dungeonModel.addFloor();
+        assertEquals(2, dungeonModel.getFloors().size());
+    }
+    @Test
+    public void testGetPlayer() {
+        PlayerModel player = dungeonModel.getPlayer();
+        assertNotNull(player);
+        assertEquals(1, player.getPositionX());
+        assertEquals(1, player.getPositionY());
     }
 }
