@@ -35,5 +35,16 @@ public class RoomModelTest {
         assertTrue("Room edges are walls", roomModel.isWall(0,0));
         assertFalse("There are no walls in the middle of the room", roomModel.isWall(1,1));
     }
+    @Test
+    public void testRoomCenterIsNotWall() {
+        int midX = roomModel.getWidth() / 2;
+        int midY = roomModel.getLength() / 2;
+        assertFalse(roomModel.isWall(midX, midY));
+    }
+
+    @Test
+    public void testMonsterGeneration() {
+        assertNotNull(roomModel.getMonsterModel());
+    }
 
 }
