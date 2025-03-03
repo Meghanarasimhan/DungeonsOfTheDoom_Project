@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FloorModel {
-    private static final int numRooms =1 ;
+    private static final int numRooms = 1;
     private final List<RoomModel> rooms;
 
     public FloorModel() {
 
         rooms = new ArrayList<>();
-        addRoom();;
+        addRoom();
     }
 
     public int getNumRooms() {

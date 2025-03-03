@@ -54,7 +54,7 @@ public class DungeonControllerTest {
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).movePlayer(1, 2);
+        verify(playerModel, times(1)).setPlayerPosition(1, 2);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class DungeonControllerTest {
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).movePlayer(3, 2);
+        verify(playerModel, times(1)).setPlayerPosition(3, 2);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class DungeonControllerTest {
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).movePlayer(2, 1);
+        verify(playerModel, times(1)).setPlayerPosition(2, 1);
     }
 
     @Test
@@ -90,7 +90,7 @@ public class DungeonControllerTest {
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).movePlayer(2, 3);
+        verify(playerModel, times(1)).setPlayerPosition(2, 3);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class DungeonControllerTest {
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).movePlayer(4, 4);
+        verify(playerModel, times(1)).setPlayerPosition(4, 4);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class DungeonControllerTest {
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).movePlayer(2, 4);
+        verify(playerModel, times(1)).setPlayerPosition(2, 4);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class DungeonControllerTest {
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).movePlayer(4, 2);
+        verify(playerModel, times(1)).setPlayerPosition(4, 2);
     }
 
     @Test
@@ -138,7 +138,7 @@ public class DungeonControllerTest {
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).movePlayer(2, 2);
+        verify(playerModel, times(1)).setPlayerPosition(2, 2);
     }
 
     @Test
@@ -150,7 +150,7 @@ public class DungeonControllerTest {
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(0)).movePlayer(anyInt(), anyInt());
+        verify(playerModel, times(0)).setPlayerPosition(anyInt(), anyInt());
     }
 
     @Test

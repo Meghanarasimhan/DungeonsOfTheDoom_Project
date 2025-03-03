@@ -10,7 +10,8 @@ public class DungeonModel {
     public DungeonModel() {
         floors = new ArrayList<>();
         floors.add(new FloorModel());
-        player = new PlayerModel(1, 1);
+        // Create Player, using first room on first floor to initialize player's position
+        player = new PlayerModel(this.getFloor(0).getRoom(0));
     }
 
     public int getNumFloors() {

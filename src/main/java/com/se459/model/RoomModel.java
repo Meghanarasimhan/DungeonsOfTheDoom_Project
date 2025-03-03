@@ -3,7 +3,7 @@ package com.se459.model;
 import java.util.Random;
 
 public class RoomModel {
-    private final Random r = new Random();;
+    private final Random r = new Random();
     private final int numSpaces;
     private final int length;
     private final int width;

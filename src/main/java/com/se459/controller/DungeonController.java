@@ -52,7 +52,7 @@ public class DungeonController implements KeyListener, ActionListener {
 
         // Check if the new position is a wall or not
         if (!dungeonModel.getFloor(0).getRoom(0).isWall(newX, newY)) {
-            player.movePlayer(newX, newY);
+            player.setPlayerPosition(newX, newY);
         }
         dungeonView.repaint(); // repaint the view to update the player's position
     }
