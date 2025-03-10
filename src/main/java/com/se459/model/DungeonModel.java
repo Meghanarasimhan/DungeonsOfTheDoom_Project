@@ -33,4 +33,15 @@ public class DungeonModel {
     public PlayerModel getPlayer() {
         return player;
     }
+
+    public void moveToNextLevel() {
+        addFloor();
+        FloorModel newFloor = getFloor(getNumFloors() - 1);
+        RoomModel newRoom = newFloor.getRoom(0);
+        player.randomizeInitialPosition(newRoom);
+    }
+
+    public FloorModel getCurrentFloor() {
+        return getFloor(getNumFloors() - 1);
+    }
 }

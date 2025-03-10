@@ -72,8 +72,8 @@ public class PlayerModel {
         return experience;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void incrementLevel() {
+        this.level++; // increment level by 1 (player will only go up by 1 level at a time)
     }
 
     public void setCurrHits(int currHits) {
