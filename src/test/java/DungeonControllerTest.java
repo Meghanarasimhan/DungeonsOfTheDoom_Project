@@ -41,20 +41,20 @@ public class DungeonControllerTest {
     public void setUp() {
         dungeonController = new DungeonController(dungeonModel, dungeonView);
         when(dungeonModel.getPlayer()).thenReturn(playerModel);
-        when(dungeonModel.getFloor(anyInt())).thenReturn(floorModel);
+        when(dungeonModel.getCurrentFloor()).thenReturn(floorModel);
         when(floorModel.getRoom(anyInt())).thenReturn(roomModel);
     }
 
     @Test
     public void testPlayerCanMoveLeft() {
-        when(playerModel.getPositionX()).thenReturn(2);
-        when(playerModel.getPositionY()).thenReturn(2);
+        when(playerModel.getPositionX()).thenReturn(3);
+        when(playerModel.getPositionY()).thenReturn(3);
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_LEFT);
         when(roomModel.isWall(anyInt(), anyInt())).thenReturn(false);
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).setPlayerPosition(1, 2);
+        verify(playerModel, times(1)).setPlayerPosition(2, 3);
     }
 
     @Test
@@ -71,14 +71,14 @@ public class DungeonControllerTest {
 
     @Test
     public void testPlayerCanMoveUp() {
-        when(playerModel.getPositionX()).thenReturn(2);
-        when(playerModel.getPositionY()).thenReturn(2);
+        when(playerModel.getPositionX()).thenReturn(3);
+        when(playerModel.getPositionY()).thenReturn(3);
         when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_UP);
         when(roomModel.isWall(anyInt(), anyInt())).thenReturn(false);
 
         dungeonController.keyPressed(keyEvent);
 
-        verify(playerModel, times(1)).setPlayerPosition(2, 1);
+        verify(playerModel, times(1)).setPlayerPosition(3, 2);
     }
 
     @Test
