@@ -14,6 +14,7 @@ public class DungeonView extends JFrame {
     private JPanel mainPanel; // main game panel
     private JTextField nameField; // text field to enter player name
     private DungeonModel dungeonModel;
+    private GamePanel gamePanel;
 
     public DungeonView(DungeonModel dungeonModel) {
         this.dungeonModel = dungeonModel;
@@ -83,7 +84,7 @@ public class DungeonView extends JFrame {
         mainPanel.add(messagePanel, BorderLayout.NORTH); // Add the message panel to the frame at the top
 
         // Create a panel to draw the room and player on the frame
-        GamePanel gamePanel = new GamePanel(dungeonModel);
+        gamePanel = new GamePanel(dungeonModel);
         // Set the preferred size of the panel based on total size of floor by cell size
         gamePanel.setPreferredSize(new Dimension(700,400));
         gamePanel.setBackground(Color.BLACK);
@@ -103,6 +104,10 @@ public class DungeonView extends JFrame {
         mainPanel.repaint(); // Refresh the visuals of the components (e.g. color/text of a component)
         pack(); // Pack the frame to fit the panel (meaning the frame will be resized to fit the panel)
         setLocationRelativeTo(null); // Center the frame
+    }
+
+    public void refreshGameView() {
+        updateStats(dungeonModel.getPlayer());
     }
 
     // Update the message label with the given message

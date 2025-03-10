@@ -12,11 +12,11 @@ import com.se459.model.RoomModel;
 public class GamePanel extends JPanel {
     private static final int CELL_SIZE = 20; //size of each cell in the room (40x40 pixels)
     private static final int PADDING = 20; //padding around the room (20 pixels)
-    private final FloorModel floorModel;
+    private final DungeonModel dungeonModel;
     private final PlayerModel player;
 
     public GamePanel(DungeonModel dungeonModel) {
-        this.floorModel = dungeonModel.getFloor(0); // get the first floor
+        this.dungeonModel = dungeonModel;
         this.player = dungeonModel.getPlayer(); // get the player
     }
 
@@ -24,7 +24,8 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        RoomModel room = floorModel.getRoom(0);
+        FloorModel currentFloor = dungeonModel.getCurrentFloor();
+        RoomModel room = currentFloor.getRoom(0);
 
         for (int i = 0; i < room.getWidth(); i++) {
             for (int j = 0; j < room.getLength(); j++) {
@@ -34,7 +35,10 @@ public class GamePanel extends JPanel {
                     g.drawString("@", (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING);
                 } else if (room.getMonsterModel() != null && (i == room.getMonsterModel().getPositionX() && j == room.getMonsterModel().getPositionY())) {
                     g.setColor(Color.RED);
-                    g.drawString(room.getMonsterModel().getScreenChar(), (i + 1) * CELL_SIZE, (j + 1) * CELL_SIZE);
+                    g.drawString(room.getMonsterModel().getScreenChar(), (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING);
+                } else if (room.isStairs(i, j)) {
+                    g.setColor(Color.BLUE);
+                    g.drawString("%", (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING);
                 } else { // otherwise, draw the room based on the 2D array
                     g.setColor(Color.GREEN);
                     g.drawString(String.valueOf(room.getCell(i, j)), (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING); // adjust i and j by padding to avoid drawing on the border

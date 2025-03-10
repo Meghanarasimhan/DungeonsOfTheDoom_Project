@@ -3,6 +3,8 @@ package com.se459.controller;
 import com.se459.model.DungeonModel;
 import com.se459.view.DungeonView;
 import com.se459.model.PlayerModel;
+import com.se459.model.RoomModel;
+
 import java.awt.event.*;
 
 public class DungeonController implements KeyListener, ActionListener {
@@ -48,11 +50,19 @@ public class DungeonController implements KeyListener, ActionListener {
             //move up left diagonally
             newX--;
             newY--;
+        } else if (keyCode == KeyEvent.VK_PERIOD && e.isShiftDown()) { // '>' key
+            if (dungeonModel.getCurrentFloor().getRoom(0).isStairs(newX, newY) && player.getLevel() < 26) {
+                dungeonModel.moveToNextLevel();
+                player.incrementLevel();
+                dungeonView.refreshGameView();
+                return;
+            }
         }
 
         // Check if the new position is a wall or not
-        if (!dungeonModel.getFloor(0).getRoom(0).isWall(newX, newY)) {
-            player.movePlayer(newX, newY);
+        RoomModel currentRoom = dungeonModel.getCurrentFloor().getRoom(0);
+        if (!currentRoom.isWall(newX, newY)) {
+            player.setPlayerPosition(newX, newY);
         }
         dungeonView.repaint(); // repaint the view to update the player's position
     }

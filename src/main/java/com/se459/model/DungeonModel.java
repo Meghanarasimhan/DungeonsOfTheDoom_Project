@@ -10,7 +10,8 @@ public class DungeonModel {
     public DungeonModel() {
         floors = new ArrayList<>();
         floors.add(new FloorModel());
-        player = new PlayerModel(1, 1);
+        // Create Player, using first room on first floor to initialize player's position
+        player = new PlayerModel(this.getFloor(0).getRoom(0));
     }
 
     public int getNumFloors() {
@@ -31,5 +32,16 @@ public class DungeonModel {
 
     public PlayerModel getPlayer() {
         return player;
+    }
+
+    public void moveToNextLevel() {
+        addFloor();
+        FloorModel newFloor = getFloor(getNumFloors() - 1);
+        RoomModel newRoom = newFloor.getRoom(0);
+        player.randomizeInitialPosition(newRoom);
+    }
+
+    public FloorModel getCurrentFloor() {
+        return getFloor(getNumFloors() - 1);
     }
 }

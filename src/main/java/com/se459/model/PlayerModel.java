@@ -1,6 +1,9 @@
 package com.se459.model;
 
+import java.util.Random;
+
 public class PlayerModel {
+    private final Random r = new Random();
     private String playerName;
     private int positionX;
     private int positionY;
@@ -16,9 +19,8 @@ public class PlayerModel {
     private int armor = 10; // signifying nothing (i.e. no armor)
     private int experience = 0; // still confused by what exactly this is (i.e. how it's measured)
 
-    public PlayerModel(int positionX, int positionY) {
-        this.positionX = positionX;
-        this.positionY = positionY;
+    public PlayerModel(RoomModel room){
+        randomizeInitialPosition(room);
     }
 
     public int getPositionX() {
@@ -29,9 +31,17 @@ public class PlayerModel {
         return positionY;
     }   
 
-    public void movePlayer(int newPositionX, int newPositionY) {
+    public void setPlayerPosition(int newPositionX, int newPositionY) {
         positionX = newPositionX;
         positionY = newPositionY;
+    }
+
+    public void randomizeInitialPosition(RoomModel room) {
+        do {
+            positionX = r.nextInt(room.getWidth());
+            positionY = r.nextInt(room.getLength());
+        } while (room.isWall(positionX, positionY)); // continue looping until player is not on a wall
+        setPlayerPosition(positionX, positionY);
     }
 
     public int getLevel() {
@@ -62,8 +72,8 @@ public class PlayerModel {
         return experience;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void incrementLevel() {
+        this.level++; // increment level by 1 (player will only go up by 1 level at a time)
     }
 
     public void setCurrHits(int currHits) {

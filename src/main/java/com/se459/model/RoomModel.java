@@ -3,12 +3,15 @@ package com.se459.model;
 import java.util.Random;
 
 public class RoomModel {
-    private final Random r = new Random();;
+    private final Random r = new Random();
     private final int numSpaces;
     private final int length;
     private final int width;
     private final char[][] room;
     private MonsterModel monsterModel = null;
+    // coordinates of stairs
+    private int stairPositionX;   
+    private int stairPositionY;
 
     public RoomModel() {
         length = r.nextInt(3, 20);
@@ -17,6 +20,7 @@ public class RoomModel {
         numSpaces = width * length;
         generateRoom();
         generateMonster();
+        generateStairs();
     }
 
     public int getNumSpaces() {
@@ -81,4 +85,17 @@ public class RoomModel {
             }
         }
     }
+
+    private void generateStairs() {
+        do {
+            stairPositionX = r.nextInt(getWidth());
+            stairPositionY = r.nextInt(getLength());
+        } while (isWall(stairPositionX, stairPositionY)); // continue looping until stairs are not on a wall
+        room[stairPositionX][stairPositionY] = '%';
+    }   
+
+    public boolean isStairs(int x, int y) {
+        return (x == stairPositionX && y == stairPositionY);
+    }
+    
 }
