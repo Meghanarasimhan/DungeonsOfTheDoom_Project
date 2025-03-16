@@ -50,6 +50,10 @@ public class DungeonController implements KeyListener, ActionListener {
             //move up left diagonally
             newX--;
             newY--;
+        } else if (keyCode == KeyEvent.VK_SPACE){ // if player enter space bar
+            // update message to clear the message
+            dungeonView.updateMessage("");
+            return;
         } else if (keyCode == KeyEvent.VK_PERIOD && e.isShiftDown()) { // '>' key
             if (dungeonModel.getCurrentFloor().getRoom(0).isStairs(newX, newY) && player.getLevel() < 26) {
                 dungeonModel.moveToNextLevel();
@@ -63,6 +67,20 @@ public class DungeonController implements KeyListener, ActionListener {
         RoomModel currentRoom = dungeonModel.getCurrentFloor().getRoom(0);
         if (!currentRoom.isWall(newX, newY)) {
             player.setPlayerPosition(newX, newY);
+
+            if (currentRoom.isGold(newX, newY)) {
+                // set amount of gold using player's level
+                currentRoom.getGoldModel().setAmount(player.getLevel());
+                // increment the player's gold
+                int amount = player.getGold() + currentRoom.getGoldModel().getAmount();
+                player.setGold(amount);
+                // update message to show amount of gold player has obtained
+                dungeonView.updateMessage("You have found " + currentRoom.getGoldModel().getAmount() + " gold pieces!");
+                dungeonView.updateStats(player); 
+                // remove the gold from the room
+                currentRoom.setGoldModel(null);
+            }
+            
         }
         dungeonView.repaint(); // repaint the view to update the player's position
     }

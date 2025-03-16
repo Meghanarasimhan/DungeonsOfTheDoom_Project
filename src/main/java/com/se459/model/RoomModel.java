@@ -9,6 +9,7 @@ public class RoomModel {
     private final int width;
     private final char[][] room;
     private MonsterModel monsterModel = null;
+    private GoldModel goldModel = null;
     // coordinates of stairs
     private int stairPositionX;   
     private int stairPositionY;
@@ -21,6 +22,7 @@ public class RoomModel {
         generateRoom();
         generateMonster();
         generateStairs();
+        generateGold();
     }
 
     public int getNumSpaces() {
@@ -43,12 +45,24 @@ public class RoomModel {
         return room[xCoordinate][yCoordinate] == '#';
     }
 
+    public boolean isGold(int xCoordinate, int yCoordinate) {
+        return goldModel != null && goldModel.getPositionX() == xCoordinate && goldModel.getPositionY() == yCoordinate;
+    }
+
     public MonsterModel getMonsterModel() {
         return monsterModel;
     }
 
     public void setMonsterModel(MonsterModel monsterModel) {
         this.monsterModel = monsterModel;
+    }
+
+    public GoldModel getGoldModel() {
+        return goldModel;
+    }
+
+    public void setGoldModel(GoldModel goldModel) {
+        this.goldModel = goldModel;
     }
 
     // Initialize the room with walls and dots (for different positions)
@@ -83,6 +97,24 @@ public class RoomModel {
                 default:
                     break;
             }
+        }
+    }
+
+    private void generateGold() {
+        boolean shouldGenerateGold = r.nextInt(3) == 0; // 1 in 3 chance of generating gold
+
+        if (shouldGenerateGold) {
+            GoldModel newGoldModel = new GoldModel();
+            int xPos = 0;
+            int yPos = 0;
+            do {
+                xPos = r.nextInt(getWidth());
+                yPos = r.nextInt(getLength());
+            } while (isWall(xPos, yPos) || isStairs(xPos, yPos)); // continue looping until gold is not on a wall or stairs
+           
+            newGoldModel.setPositionX(xPos);
+            newGoldModel.setPositionY(yPos);     
+            setGoldModel(newGoldModel);       
         }
     }
 
