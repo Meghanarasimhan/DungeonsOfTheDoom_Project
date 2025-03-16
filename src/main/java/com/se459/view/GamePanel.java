@@ -39,6 +39,9 @@ public class GamePanel extends JPanel {
                 } else if (room.isStairs(i, j)) {
                     g.setColor(Color.BLUE);
                     g.drawString("%", (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING);
+                } else if (room.getGoldModel() != null && (i == room.getGoldModel().getPositionX() && j == room.getGoldModel().getPositionY())) {
+                    g.setColor(Color.ORANGE);
+                    g.drawString("*", (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING);
                 } else { // otherwise, draw the room based on the 2D array
                     g.setColor(Color.GREEN);
                     g.drawString(String.valueOf(room.getCell(i, j)), (i * CELL_SIZE) + PADDING, (j * CELL_SIZE) + PADDING); // adjust i and j by padding to avoid drawing on the border
