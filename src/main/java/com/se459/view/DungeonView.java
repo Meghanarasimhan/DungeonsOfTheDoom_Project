@@ -3,6 +3,7 @@ package com.se459.view;
 import javax.swing.*;
 import java.awt.*;
 
+import com.se459.model.CombatModel;
 import com.se459.model.DungeonModel;
 import com.se459.model.PlayerModel;
 import java.awt.event.ActionListener;
@@ -117,4 +118,17 @@ public class DungeonView extends JFrame {
         repaint(); // Repaint the frame to display the updated stats
     }
 
+    public void showCombatPanel() {
+        CombatModel combatModel = new CombatModel(dungeonModel.getPlayer(),
+                dungeonModel.getFloor(0).getRoom(0).getMonsterModel());
+        CombatPanel combatPanel = new CombatPanel(combatModel);
+        // Set the preferred size of the panel based on total size of floor by cell size
+        combatPanel.setPreferredSize(new Dimension(700,400));
+        combatPanel.setBackground(Color.BLACK);
+        combatPanel.repaint();
+        mainPanel.add(combatPanel, BorderLayout.CENTER); // Add the panel to the frame
+        mainPanel.revalidate(); // Revalidate main panel (updates layout), necessary after adding/removing components
+        mainPanel.repaint(); // Refresh the visuals of the components (e.g. color/text of a component)
+        pack(); // Pack the frame to fit the panel (meaning the frame will be resized to fit the panel)
+    }
 }

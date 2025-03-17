@@ -1,6 +1,7 @@
 package com.se459.model;
 
 import java.util.List;
+import java.util.Random;
 
 public class MonsterModel {
 
@@ -116,5 +117,15 @@ public class MonsterModel {
 
     public void setLevelsFound(List<Integer> levelsFound) {
         this.levelsFound = levelsFound;
+    }
+
+    public int attack() {
+        Random random = new Random();
+
+        if (random.nextDouble() > 0.5) {
+            return getDmg();
+        } else {
+            return 0;
+        }
     }
 }

@@ -54,7 +54,17 @@ public class DungeonController implements KeyListener, ActionListener {
         if (!dungeonModel.getFloor(0).getRoom(0).isWall(newX, newY)) {
             player.movePlayer(newX, newY);
         }
-        dungeonView.repaint(); // repaint the view to update the player's position
+
+        //check if player ran into a monster
+        if (dungeonModel.getFloor(0).getRoom(0).getMonsterModel() != null &&
+                dungeonModel.getFloor(0).getRoom(0).getMonsterModel().getPositionX() == player.getPositionX() &&
+                dungeonModel.getFloor(0).getRoom(0).getMonsterModel().getPositionY() == player.getPositionY()
+        ) {
+            System.out.println("Player ran into monster!");
+            dungeonView.showCombatPanel();
+        } else {
+            dungeonView.repaint(); // repaint the view to update the player's position
+        }
     }
 
     @Override

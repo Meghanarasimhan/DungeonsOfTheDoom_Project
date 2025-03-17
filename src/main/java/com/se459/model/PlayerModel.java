@@ -1,5 +1,7 @@
 package com.se459.model;
 
+import java.util.Random;
+
 public class PlayerModel {
     private String playerName;
     private int positionX;
@@ -105,6 +107,15 @@ public class PlayerModel {
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public int attack(int armor) {
+        Random random = new Random();
+        if (random.nextInt(0, 20) > armor) {
+           return  20 - getLevel() - armor;
+        } else {
+            return 0;
+        }
     }
 
 }
